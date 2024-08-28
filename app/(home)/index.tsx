@@ -1,5 +1,6 @@
-import { Pressable, Text} from "react-native"
+import { Pressable, Text, View} from "react-native"
 import { Href, router } from "expo-router"
+import { Title24 } from "@/components/StyledText"
 
 interface Test {
   name: string
@@ -28,18 +29,18 @@ export default function HomeScreen() {
     router.navigate(name);
   }
   return (
-    <div>
-      <div>
+    <View>
+      <View>
         {
           services.map((service: Test, index: number) => {
             return (
               <Pressable onPress={() => onCickService(service.href)} key={index}>
-                <Text>Go to {service.name}</Text>
+                <Title24> {service.name}로 가기</Title24>
               </Pressable>
             )
           })
         }
-      </div>
-    </div>
+      </View>
+    </View>
   )
 }

@@ -1,5 +1,9 @@
+import { Text, View } from "react-native";
+
 export default function OnlineScreen() {
   return (
-    <div>online</div>
+    <View>
+      <Text>online</Text>
+    </View>
   )
 }

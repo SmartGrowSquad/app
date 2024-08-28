@@ -1,5 +1,9 @@
+import { Text, View } from "react-native";
+
 export default function PickupLayout() {
   return (
-    <div>pickup</div>
+    <View>
+      <Text>pickup</Text>
+    </View>
   )
 }
