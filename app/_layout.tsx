@@ -9,6 +9,7 @@ import 'react-native-reanimated';
 import { useColorScheme } from '@/components/useColorScheme';
 import { Provider } from 'react-redux';
 import { store } from '@/store/store';
+import Header from '@/components/header/Header';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -57,8 +58,9 @@ function RootLayoutNav() {
     <Provider store={store}>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <Stack>
-          <Stack.Screen name="(home)" options={{ headerShown: false }} />
-          <Stack.Screen name="near" options={{ headerShown: false }} />
+          <Stack.Screen name="(home)" options={{ headerShown: false }}/>
+          <Stack.Screen name="urbani" options={{ header: () => Header() }}/>
+          <Stack.Screen name="passcode" options={{ header: () => Header() }}/>
         </Stack>
       </ThemeProvider>
     </Provider>
