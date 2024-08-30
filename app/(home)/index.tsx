@@ -20,8 +20,8 @@ export default function HomeScreen() {
       <View style={styles.wrapper} >
         {/* 직접찾기, 배달 row  */}
         <View style={styles.mainServiceContainer}>
-          { serviceBox({ title: "직접찾기", subtitle: "어반이와 함께!", href: '/urbani/findself' }) }
-          { serviceBox({ title: "배달", subtitle: "근처 어디서든!", href: '/urbani/delivery' }) }
+          { serviceBox({ title: "직접찾기", subtitle: "어반이와 함께!", href: 'urbani/findself' }) }
+          { serviceBox({ title: "배달", subtitle: "근처 어디서든!", href: 'urbani/delivery' }) }
         </View>
           { serviceBox({ title: "내 근처 어반이 찾기", subtitle: "어떤 어반이가 있을까요?", href: '/passcode' }) }
           { serviceBox({ title: "패스코드", subtitle: "내가 구매한 작물을 바로 찾을 수 있어요!", href: '/passcode' }) }

@@ -1,7 +1,7 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
+import { Stack, useNavigation } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
@@ -53,14 +53,14 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
-
+  const navigation = useNavigation();
   return (
     <Provider store={store}>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <Stack>
           <Stack.Screen name="(home)" options={{ headerShown: false }}/>
-          <Stack.Screen name="urbani" options={{ header: () => Header() }}/>
-          <Stack.Screen name="passcode" options={{ header: () => Header() }}/>
+          <Stack.Screen name="urbani" options={{ header: () => Header(navigation) }}/>
+          <Stack.Screen name="passcode" options={{ header: () => Header(navigation) }}/>
         </Stack>
       </ThemeProvider>
     </Provider>
