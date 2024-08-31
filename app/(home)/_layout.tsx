@@ -1,23 +1,29 @@
-import HomeHeader from "@/components/header/HomeHeader";
-import { Stack } from "expo-router";
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Drawer } from 'expo-router/drawer';
+import { StyleSheet } from 'react-native';
 
 export default function HomeLayout() {
   return (
     <GestureHandlerRootView>
       <Drawer
         screenOptions={{
-          header: HomeHeader,
+          headerShown: false,
+          drawerType: 'front',
+          drawerPosition: 'right',
+          drawerStyle: styles.drawerStyle
         }}
       >
         <Drawer.Screen
           name="index" // This is the name of the page and must match the url from root
-          options={{
-            drawerPosition: 'right',
-          }}
+         
         />
       </Drawer>
     </GestureHandlerRootView>
   )
 }
+const styles = StyleSheet.create({
+  drawerStyle: {
+    width: '88%',
+
+  }
+})

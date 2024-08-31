@@ -9,7 +9,9 @@ export interface DefaultHeaderProps {
 
 export default function DefaultHeader(props: DefaultHeaderProps) {
   return (
-    <View style={[styles.container, { backgroundColor: props.backgroundColor }]}>
+    <View style={[styles.container, { 
+      backgroundColor: props.backgroundColor ,
+    }]}>
       <View style={styles.wrapper}>
         <View>{props.left}</View>
         <View>{props.center}</View>

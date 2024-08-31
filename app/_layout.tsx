@@ -54,13 +54,15 @@ export default function RootLayout() {
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
   const navigation = useNavigation();
+
   return (
     <Provider store={store}>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <Stack>
           <Stack.Screen name="(home)" options={{ headerShown: false }}/>
-          <Stack.Screen name="urbani" options={{ header: () => Header(navigation) }}/>
-          <Stack.Screen name="passcode" options={{ header: () => Header(navigation) }}/>
+          <Stack.Screen name="urbani" options={{ headerShown: false }} />
+          <Stack.Screen name="passcode" options={{ headerShown: false }}/>
+          <Stack.Screen name="search" options={{ headerShown: false }}/>
         </Stack>
       </ThemeProvider>
     </Provider>

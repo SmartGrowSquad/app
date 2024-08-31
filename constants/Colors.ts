@@ -1,6 +1,8 @@
 const tintColorLight = '#2f95dc';
 const tintColorDark = '#fff';
 
+export const HomeBackgroundColor = '#F4F5FB"';
+
 export default {
   light: {
     text: '#333',
@@ -17,3 +19,4 @@ export default {
     tabIconSelected: tintColorDark,
   },
 };
+

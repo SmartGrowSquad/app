@@ -13,11 +13,9 @@ function leftPressable(onPress: () => any, title?: string): React.JSX.Element {
     </View>
   )
 }
-export default function Header(navigation: any, title?: string) {
- 
-
+export default function Header({back, title}:{back: any, title?: string}) {
   const headerProps: DefaultHeaderProps = {
-    left: leftPressable(() => navigation.goBack(), title),
+    left: leftPressable(back, title),
   }
   return DefaultHeader(headerProps);
 }
