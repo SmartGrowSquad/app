@@ -13,9 +13,10 @@ function leftPressable(onPress: () => any, title?: string): React.JSX.Element {
     </View>
   )
 }
-export default function Header({back, title}:{back: any, title?: string}) {
+export default function Header({back, title, backgroundColor}:{back: any, title?: string, backgroundColor?: string}) {
   const headerProps: DefaultHeaderProps = {
     left: leftPressable(back, title),
+    backgroundColor: backgroundColor
   }
   return DefaultHeader(headerProps);
 }

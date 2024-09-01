@@ -15,7 +15,6 @@ export default function HomeLayout() {
       >
         <Drawer.Screen
           name="index" // This is the name of the page and must match the url from root
-         
         />
       </Drawer>
     </GestureHandlerRootView>

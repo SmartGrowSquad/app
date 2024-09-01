@@ -5,12 +5,12 @@ import { Href, router } from "expo-router"
 interface ServiceBoxProps {
   title?: string,
   subtitle: string,
-  href?: Href<string> | null
+  href?: string | null
 }
 
 export function ServiceBox (props: ServiceBoxProps) {
   return (
-    <Pressable style={styles.serviceBoxContainer} onPress={() => {props.href && router.navigate(props.href)}}>
+    <Pressable style={styles.serviceBoxContainer} onPress={() => {props.href && router.navigate(props.href as Href<string>)}}>
       <View style={styles.serviceBoxWrapper}>
         <Title20>{props.title}</Title20>
         <Body16>{props.subtitle}</Body16>
