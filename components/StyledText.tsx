@@ -19,5 +19,5 @@ export function Body14(props: TextProps) {
   return <Text {...props} style={[props.style, { fontFamily: 'Pretendard-Regular', fontSize: 14 }]} />;
 }
 export function Caption(props: TextProps) {
-  return <Text {...props} style={[props.style, { fontFamily: 'Pretendard-Regular', fontSize: 12 }]} />;
+  return <Text {...props} style={[props.style, { fontFamily: 'Pretendard-Regular', fontSize: 16, color: "#b4b4b4"}]} />;
 }

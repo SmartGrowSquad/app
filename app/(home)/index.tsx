@@ -1,6 +1,6 @@
-import { Pressable, Text, View, StyleSheet, ScrollView } from "react-native"
+import { Pressable, Image, View, StyleSheet, ScrollView } from "react-native"
 import { Href, router } from "expo-router"
-import { Body16, Title20, Title24 } from "@/components/StyledText"
+import { Body16, DefaultText, Title20, Title24 } from "@/components/StyledText"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import HomeHeader from "@/components/header/HomeHeader"
 import { ServiceBox } from "@/components/ServiceBox"
@@ -11,20 +11,42 @@ export default function HomeScreen() {
     <View style={[styles.container,
       {
         paddingTop: insets.top,
-        // paddingBottom: insets.bottom
       }
     ]}>
       <HomeHeader/>
       <ScrollView >
         <View style={styles.wrapper} >
-          {/* 직접찾기, 배달 row  */}
+
           <View style={styles.mainServiceContainer}>
-            <ServiceBox title="직접찾기" subtitle="어반이와 함께!" href='/service/findself' />
-            <ServiceBox title="배달" subtitle="근처 어디서든!" href='/service/delivery' />
+            <ServiceBox title="직접찾기" subtitle="어반이와 함께!" href='/service/findself' >
+              <View style={styles.imageContainer}>
+                <Image source={ require("../../assets/images/findself_3x.png") } style={{ width: '100%',height: 60, resizeMode: 'contain'}}/>
+              </View>
+            </ServiceBox>
+
+            <ServiceBox title="배달" subtitle="근처 어디서든!" href='/service/delivery'>
+              <View style={styles.imageContainer}>
+                <Image source={ require("../../assets/images/delivery_3x.png") } style={{ width: '100%',height: 60, resizeMode: 'contain'}}/>
+              </View>
+            </ServiceBox>
           </View>
-            <ServiceBox title="내 근처 어반이 찾기" subtitle="어떤 어반이가 있을까요?" href='/search' />
-            <ServiceBox title="패스코드" subtitle="내가 구매한 작물을 바로 찾을 수 있어요!" href='/passcode' />
-            <ServiceBox subtitle="내가 좋아하는 작물"  />
+
+          <ServiceBox title="내 근처 어반이 찾기" subtitle="어떤 어반이가 있을까요?" href='/search' direction="row">
+            <View style={styles.imageContainer}>
+              <Image source={ require("../../assets/images/searchUrbani.png") } style={{ width: 160, height:140, resizeMode: 'contain'}}/>
+            </View>
+          </ServiceBox>
+
+          <ServiceBox title="패스코드" subtitle="내가 구매한 작물을 바로 찾을 수 있어요!" option="list">
+            {/* 로그인 상태가 아닌 경우 */}
+            {/* 주문 내역이 없을 경우 */}
+            
+          </ServiceBox>
+
+          <ServiceBox subtitle="내가 좋아하는 작물" option="list">
+            {/* 로그인 상태가 아닌 경우 */}
+            {/* 좋아하는 작물이 없을 경우 */}
+          </ServiceBox>
         </View>
       </ScrollView>
     </View>
@@ -43,9 +65,12 @@ const styles = StyleSheet.create({
     gap: 16,
     padding: 16,
     paddingTop: 20,
+    paddingBottom: 100,
   },
   mainServiceContainer: {
     flexDirection: 'row',
     gap: 16
   },
+  imageContainer: {
+  }
 })

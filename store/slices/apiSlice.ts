@@ -10,7 +10,7 @@ export const apiSlice = createApi({
     // 인증은 mutation으로 처리
     signin: build.mutation({
        // note: an optional `queryFn` may be used in place of `query`
-       query: ({ id, ...patch }) => ({
+      query: ({ id, ...patch }) => ({
         url: `auth`,
         method: 'POST',
         body: patch,
@@ -54,7 +54,31 @@ export const apiSlice = createApi({
       },
       async onCacheEntryAdded() {},
     }),
+    singup: build.mutation({
+      query: ({ id, ...patch }) => ({
+        url: `auth`,
+        method: 'POST',
+        body: patch,
+      }),
+      async onQueryStarted(
+        arg,
+        { dispatch, getState, queryFulfilled, requestId, extra, getCacheEntry }
+      ) {
+        try {
+          // 회원 가입
+          // 회원 가입이 완료되면 로그인 시도
+        } catch (error) {
+          console.error('Failed to fetch posts:', error)
+        }
+      },
+    }),
+    // 근처에 있는 어반이 리스트
+    // 근처에 있는 작물 리스트
+    // 작물 상세 정보
+    // 패스코드
+    // 결제
   }),
+
 });
 
 export const { useSigninMutation } = apiSlice;

@@ -1,9 +1,10 @@
 import { Pressable, StyleSheet, View } from "react-native";
 import DefaultHeader, { DefaultHeaderProps } from "./DefaultHeader";
-import AntDesign from '@expo/vector-icons/AntDesign';
+import { AntDesign, Feather } from '@expo/vector-icons';
 import { Body16, Title16 } from "../StyledText";
 
 function leftPressable(onPress: () => any, title?: string): React.JSX.Element {
+  if(onPress === undefined) return <></>
   return (
     <View style={styles.leftPressableContainer}>
       <Pressable onPress={onPress}>
@@ -13,9 +14,35 @@ function leftPressable(onPress: () => any, title?: string): React.JSX.Element {
     </View>
   )
 }
-export default function Header({back, title, backgroundColor}:{back: any, title?: string, backgroundColor?: string}) {
+
+function rightPressable(onPress: () => any): React.JSX.Element {
+  if(onPress === undefined) return <></>
+  return (
+    <View style={styles.leftPressableContainer}>
+      <Pressable onPress={onPress}>
+        <Feather name="x" size={24} color="#333" />
+      </Pressable>
+    </View>
+  )
+}
+
+export default function Header({
+  back, 
+  title,
+  backgroundColor, 
+  cancel, 
+  center
+}:{
+  back?: any, 
+  title?: string, 
+  backgroundColor?: string, 
+  cancel?: any, 
+  center?: string
+}) {
   const headerProps: DefaultHeaderProps = {
     left: leftPressable(back, title),
+    center: center,
+    right: rightPressable(cancel),
     backgroundColor: backgroundColor
   }
   return DefaultHeader(headerProps);

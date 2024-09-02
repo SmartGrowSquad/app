@@ -1,22 +1,18 @@
 import Header from "@/components/header/Header";
 import { DefaultText } from "@/components/StyledText";
-import { useLocalSearchParams, useNavigation } from "expo-router";
-import { Pressable, ScrollView, View } from "react-native";
+import { router, useLocalSearchParams, useNavigation } from "expo-router";
+import { View } from "react-native";
 import { StyleSheet } from 'react-native';
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import MapView from 'react-native-maps';
 
-export function SearchScreen() {
-  const { service } = useLocalSearchParams();
+export default function SearchScreen() {
   const navigation = useNavigation();
-  const insets = useSafeAreaInsets();
   
   return (
-    <View>
-      <Header back={() => navigation.goBack()} backgroundColor="#fff"/>
-      <ScrollView>
-        <DefaultText>Search</DefaultText>
-        
-      </ScrollView>
+    <View style={styles.container}>
+      <Header back={() => router.back()} backgroundColor="#fff"/>
+      {/* <DefaultText>search</DefaultText> */}
+      <MapView style={styles.map}/>
     </View>
   )
 }
@@ -24,6 +20,10 @@ export function SearchScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
-  }
+    flex: 1,
+  },
+  map: {
+    width: '100%',
+    height: '100%',
+  },
 })

@@ -62,6 +62,8 @@ function RootLayoutNav() {
           <Stack.Screen name="service" options={{ headerShown: false }} />
           <Stack.Screen name="passcode" options={{ headerShown: false }}/>
           <Stack.Screen name="search" options={{ headerShown: false }}/>
+          <Stack.Screen name="setting" options={{ headerShown: false }}/>  
+          <Stack.Screen name="auth" options={{ headerShown: false }}/>
         </Stack>
       </ThemeProvider>
     </Provider>
