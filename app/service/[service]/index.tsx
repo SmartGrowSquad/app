@@ -25,7 +25,32 @@ export default function ServiceScreen() {
       'name': '상추',
       'subtitle':  'Lettuce',
       'imageUrl': null
-    }
+    },
+    {
+      'id': 1,
+      'name': '상추',
+      'subtitle':  'Lettuce',
+      'imageUrl': 'url'
+    },
+    {
+      'id': 2,
+      'name': '상추',
+      'subtitle':  'Lettuce',
+      'imageUrl': 'url'
+    },
+    {
+      'id': 3,
+      'name': '상추',
+      'subtitle':  'Lettuce',
+      'imageUrl': null
+    },
+    {
+      'id': 1,
+      'name': '상추',
+      'subtitle':  'Lettuce',
+      'imageUrl': 'url'
+    },
+  
   ]
   const title = service === 'findself' ? '직접찾기' : '배달';
   const itemView = (data: any) => 
@@ -56,7 +81,6 @@ export default function ServiceScreen() {
 const styles = StyleSheet.create({
   container: {
     flex:1,
-    
   },
   itemContainer: {
     backgroundColor: '#fff',  

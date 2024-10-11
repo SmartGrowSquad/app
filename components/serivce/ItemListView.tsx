@@ -15,15 +15,15 @@ export default function ItemListView({
 }: ServiceLayoutProps) {
   console.log(url)
   return (
-    <View>
-      <View>
+    <View style={styles.container}>
+      <View style={styles.categoryContainer}>
         <DefaultText>카테고리</DefaultText>
       </View>
       <ScrollView style={{
         padding: 16,
         backgroundColor: '#fff',
         flexDirection: 'column',
-        gap: 8
+        gap: 8,
       }}>
         {
           items.map((item: any, index: number) => 
@@ -38,5 +38,16 @@ export default function ItemListView({
 }
 
 const styles = StyleSheet.create({
-  container: {}
+  container: {
+    height: '100%',
+
+  },
+  categoryContainer: {
+    paddingTop: 8,
+    paddingBottom: 8,
+    paddingLeft: 16,
+    paddingRight: 16,
+    backgroundColor: '#fff',
+    
+  }
 })

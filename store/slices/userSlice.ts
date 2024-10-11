@@ -8,10 +8,10 @@ interface UserState {
 }
 
 const initialState: UserState = {
-  name: "",
-  email: "",
+  name: "test",
+  email: "test@email.com",
   location: null,
-  role: ""
+  role: "ROLE_USER"
 }
 
 export const userSlice = createSlice({

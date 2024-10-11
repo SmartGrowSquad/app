@@ -8,7 +8,7 @@ interface AuthState {
 }
 
 const initialState: AuthState = {
-  authenticated: false,
+  authenticated: true,
   role: "ROLE_CUSTOMER"
 }
 

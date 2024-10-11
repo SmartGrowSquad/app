@@ -4,9 +4,13 @@ import { Body16, DefaultText, Title20, Title24 } from "@/components/StyledText"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import HomeHeader from "@/components/header/HomeHeader"
 import { ServiceBox } from "@/components/ServiceBox"
+import { useSelector } from "react-redux"
+import { RootState } from "@/store/store"
 
 export default function HomeScreen() {
   const insets = useSafeAreaInsets();
+  const user = useSelector((state: RootState) => state.user, );
+  const auth = useSelector((state: RootState) => state.auth );
   return (
     <View style={[styles.container,
       {
@@ -39,12 +43,28 @@ export default function HomeScreen() {
 
           <ServiceBox title="패스코드" subtitle="내가 구매한 작물을 바로 찾을 수 있어요!" option="list">
             {/* 로그인 상태가 아닌 경우 */}
+            <View style={styles.ListServiceBoxContainer}>
+              {
+                !auth.authenticated ?
+                  <DefaultText>로그인이 필요합니다.</DefaultText>
+                :
+                  <DefaultText>패스코드가 없습니다.</DefaultText>
+              }
+            </View>
+
             {/* 주문 내역이 없을 경우 */}
-            
           </ServiceBox>
 
           <ServiceBox subtitle="내가 좋아하는 작물" option="list">
             {/* 로그인 상태가 아닌 경우 */}
+            <View style={styles.ListServiceBoxContainer}>
+              {
+                !auth.authenticated ?
+                  <DefaultText>로그인이 필요합니다.</DefaultText>
+                :
+                  <DefaultText>좋아하는 작물이 없습니다.</DefaultText>
+              }
+            </View>
             {/* 좋아하는 작물이 없을 경우 */}
           </ServiceBox>
         </View>
@@ -70,6 +90,11 @@ const styles = StyleSheet.create({
   mainServiceContainer: {
     flexDirection: 'row',
     gap: 16
+  },
+  ListServiceBoxContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   imageContainer: {
   }

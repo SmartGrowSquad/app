@@ -14,8 +14,7 @@ export default function PasscodeLayout() {
           paddingTop: insets.top,
         },
       ]}
-    > 
-      
+    >
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }}/>
         <Stack.Screen name="[purchaseId]" options={{ headerShown: false }}/>

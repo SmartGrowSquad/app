@@ -2,9 +2,10 @@ import { Pressable, StyleSheet, View } from "react-native";
 import DefaultHeader, { DefaultHeaderProps } from "./DefaultHeader";
 import { AntDesign, Feather } from '@expo/vector-icons';
 import { Body16, Title16 } from "../StyledText";
+import { Fragment } from "react";
 
 function leftPressable(onPress: () => any, title?: string): React.JSX.Element {
-  if(onPress === undefined) return <></>
+  if(onPress === undefined) return <Fragment></Fragment>
   return (
     <View style={styles.leftPressableContainer}>
       <Pressable onPress={onPress}>
@@ -16,7 +17,7 @@ function leftPressable(onPress: () => any, title?: string): React.JSX.Element {
 }
 
 function rightPressable(onPress: () => any): React.JSX.Element {
-  if(onPress === undefined) return <></>
+  if(onPress === undefined) return <Fragment></Fragment>
   return (
     <View style={styles.leftPressableContainer}>
       <Pressable onPress={onPress}>
