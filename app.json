@@ -8,6 +8,7 @@
     "userInterfaceStyle": "automatic",
     "splash": {
       "resizeMode": "contain",
+      "image": "./assets/images/splash.png",
       "backgroundColor": "#ffffff"
     },
     "ios": {
@@ -23,10 +24,19 @@
       "output": "static"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location."
+        }
+      ],
+      "expo-secure-store"
     ],
     "experiments": {
       "typedRoutes": true
-    }
-  }
+    },
+    "sdkVersion": "51.0.0"
+  },
+  "name": "urbani"
 }

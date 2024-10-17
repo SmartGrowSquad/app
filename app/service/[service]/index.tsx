@@ -2,57 +2,20 @@ import Header from "@/components/header/Header";
 import LocationView from "@/components/location/LocationView";
 import ItemListView from "@/components/serivce/ItemListView";
 import { Caption, DefaultText, Title16 } from "@/components/StyledText";
+import { useGetAllCropsQuery } from "@/store/slices/apiSlice";
 import { router, useLocalSearchParams } from "expo-router";
-import { View, StyleSheet } from "react-native";
+import { useEffect } from "react";
+import { View, StyleSheet, Image } from "react-native";
 
 export default function ServiceScreen() {
   const { service } = useLocalSearchParams();
-  const dumyItems = [
-    {
-      'id': 1,
-      'name': '상추',
-      'subtitle':  'Lettuce',
-      'imageUrl': 'url'
-    },
-    {
-      'id': 2,
-      'name': '상추',
-      'subtitle':  'Lettuce',
-      'imageUrl': 'url'
-    },
-    {
-      'id': 3,
-      'name': '상추',
-      'subtitle':  'Lettuce',
-      'imageUrl': null
-    },
-    {
-      'id': 1,
-      'name': '상추',
-      'subtitle':  'Lettuce',
-      'imageUrl': 'url'
-    },
-    {
-      'id': 2,
-      'name': '상추',
-      'subtitle':  'Lettuce',
-      'imageUrl': 'url'
-    },
-    {
-      'id': 3,
-      'name': '상추',
-      'subtitle':  'Lettuce',
-      'imageUrl': null
-    },
-    {
-      'id': 1,
-      'name': '상추',
-      'subtitle':  'Lettuce',
-      'imageUrl': 'url'
-    },
-  
-  ]
+  const { currentData, isFetching, isError } = useGetAllCropsQuery(null); 
   const title = service === 'findself' ? '직접찾기' : '배달';
+  useEffect(() => {
+    if(!isFetching) {
+      console.log(currentData);
+    }
+  }, [isFetching]);
   const itemView = (data: any) => 
     <View style={styles.itemContainer}>
       <View style={{
@@ -61,7 +24,7 @@ export default function ServiceScreen() {
         backgroundColor: '#f0f0f0',
         borderRadius: 8
       }}>
-        {data.imageUrl ? <DefaultText>이미지</DefaultText> : null}
+        {data.imageUrl ? <Image source={{ uri: data.imageUrl }} style={styles.image}/> : null}
       </View>
       
       <View>
@@ -72,8 +35,7 @@ export default function ServiceScreen() {
   return (
     <View style={styles.container}>
       <Header back={() => router.back()} title={title} backgroundColor="#fff"/>
-      <LocationView/>
-      <ItemListView items={dumyItems} itemView={itemView} url='service/detail'/>
+      {currentData && <ItemListView items={currentData} itemView={itemView} url='service/detail'/>}
     </View>
   )
 }
@@ -91,5 +53,10 @@ const styles = StyleSheet.create({
 
     flexDirection: 'row',
     gap: 16
+  }, 
+  image: {
+    width: 80,
+    height: 80,
+    borderRadius: 8
   }
 })

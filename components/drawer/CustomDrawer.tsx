@@ -4,6 +4,7 @@ import { ScrollView, Pressable, View, StyleSheet } from "react-native";
 import { Title20, Body14, DefaultText, Body16, Caption } from "../StyledText";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 
 interface CustomDrawerProps {
@@ -13,13 +14,12 @@ interface CustomDrawerProps {
 
 export default function CustomDrawer({
   onPressItem,
-  insets
 }: CustomDrawerProps) {
   const user = useSelector((state: RootState) => state.user);
   const auth = useSelector((state: RootState) => state.auth);
 
   return (
-    <ScrollView style={[styles.drawerContainer, { marginTop: insets.top, }]}>
+    <SafeAreaView style={styles.drawerContainer}>
       {/* 사용자 정보  */}
 
       <Pressable 
@@ -43,34 +43,37 @@ export default function CustomDrawer({
       </Pressable>
       
       <View style={styles.subServiceContainer}>
-        {/* 이용 내역 */}
-        <Pressable onPress={() => onPressItem(() => router.navigate('/history'))}>
-          <Body16>이용내역</Body16>
-        </Pressable>
+        {
+          auth.authenticated &&
+          <Pressable onPress={() => onPressItem(() => router.navigate('/history'))}>
+            <Body16>이용내역</Body16>
+          </Pressable>
+        } 
       </View>
       
       
       <View style={styles.informationCenterContainer}>
         {/* 고객센터 */}
-        <Pressable onPress={() => onPressItem()}>
+        <Pressable >
           <Caption>고객센터</Caption>
         </Pressable>
         
         {/* 공지사항 */}
-        <Pressable onPress={() => onPressItem()}>
+        <Pressable >
           <Caption>공지사항</Caption>
         </Pressable>
 
         {/* 이용약관/개인정보 처리방침  */}
-        <Pressable onPress={() => onPressItem()}>
+        <Pressable >
           <Caption>이용약관 / 개인정보 처리방침</Caption>
         </Pressable>
       </View>
-    </ScrollView>
+    </SafeAreaView>
   )
 }
 const styles = StyleSheet.create({
   drawerContainer: {
+    flex: 1,
     backgroundColor: '#fff',
     // padding: 16,
   },

@@ -1,19 +1,16 @@
 import Header from "@/components/header/Header";
 import { router, Stack } from "expo-router";
 import { View, StyleSheet} from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function SettingLayout() {
-  const insets = useSafeAreaInsets();
   return (
-    <View style={[styles.container, {
-      paddingTop: insets.top,
-    }]}>
+    <SafeAreaView style={styles.container}>
       <Header cancel={() => router.back() }/>
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }}/>
       </Stack>
-    </View>
+    </SafeAreaView>
   )
 }
 

@@ -1,5 +1,5 @@
 import { Stack } from "expo-router";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, SafeAreaView } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 
@@ -7,19 +7,19 @@ export default function PasscodeLayout() {
   const insets = useSafeAreaInsets();
 
   return (
-    <View 
-      style={[
-        styles.container,
-        {
-          paddingTop: insets.top,
-        },
-      ]}
+    <SafeAreaView 
+      style={styles.container}
     >
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }}/>
-        <Stack.Screen name="[purchaseId]" options={{ headerShown: false }}/>
+        <Stack.Screen name="modal" 
+          options={{
+            headerShown: false,
+            presentation: 'modal',
+          }}
+        />
       </Stack>
-    </View>
+    </SafeAreaView>
   )
 }
 const styles = StyleSheet.create({

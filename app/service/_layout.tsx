@@ -15,6 +15,12 @@ export default function ServiceRootLayout() {
         <Stack>
           <Stack.Screen name="[service]" options={{ headerShown: false }}/>
           <Stack.Screen name="detail/[id]" options={{ headerShown: false }}/>
+          <Stack.Screen name="modal"
+            options={{
+              presentation: 'modal',
+              headerShown: false,
+            }}
+          />
         </Stack>
       </SafeAreaView>
     </Fragment>

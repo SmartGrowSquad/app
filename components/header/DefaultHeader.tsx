@@ -1,5 +1,5 @@
 import { StyleSheet, View } from 'react-native'
-import { Title20 } from '../StyledText';
+import { Body16, Title20 } from '../StyledText';
 
 export interface DefaultHeaderProps {
   left?: any;
@@ -14,7 +14,7 @@ export default function DefaultHeader(props: DefaultHeaderProps) {
       backgroundColor: props.backgroundColor ,
     }]}>
       <View style={styles.wrapper}>
-        <View>{props.left}</View>
+        <Body16>{props.left}</Body16>
         <Title20>{props.center}</Title20>
         <View>{props.right}</View>
       </View>

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Pressable, ScrollView, View, StyleSheet } from "react-native";
 import { DefaultText } from "../StyledText";
 import { Href, router } from "expo-router";
+import CategoryBar from "./CategoryBar";
 
 interface ServiceLayoutProps {
   items: Array<any>;
@@ -13,11 +14,25 @@ export default function ItemListView({
   url,
   itemView
 }: ServiceLayoutProps) {
-  console.log(url)
+  const [categories, setCategories] = React.useState<string[]>([]);
+  const [selectedCategory, setSelectedCategory] = React.useState<string>('');
+
+  useEffect(() => {
+    const data = [
+      "채소",
+      "허브",
+    ]
+    setCategories(data)
+    setSelectedCategory(data[0]);
+  }, [])
   return (
     <View style={styles.container}>
       <View style={styles.categoryContainer}>
-        <DefaultText>카테고리</DefaultText>
+        <CategoryBar 
+          categories={categories}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+        />
       </View>
       <ScrollView style={{
         padding: 16,

@@ -8,15 +8,20 @@ interface ServiceBoxProps {
   href?: string | null
   children?: React.ReactNode,
   direction?: 'row' | 'column',
-  option?: 'list'
+  option?: 'list',
+  height?: number,
 }
 
 export function ServiceBox (props: ServiceBoxProps) {
   return (
     <Pressable style={[styles.serviceBoxContainer, {
       flexDirection: props.direction,
-      height: props.direction === 'row' ? undefined : 204,
+      height: props.direction === 'row' ? 
+          204
+        : 
+          props.height ? props.height : 204 ,
       justifyContent: props.option === 'list' ? undefined : 'space-between',
+      
     }]} onPress={() => {props.href && router.navigate(props.href as Href<string>)}}>
       <View style={styles.serviceBoxWrapper}>
         {props.title && <Title20>{props.title}</Title20>}
