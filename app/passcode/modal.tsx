@@ -12,12 +12,14 @@ export default function QrModal() {
   const key = '1';
   console.log(params);
 
-  const convertToEncryptedCode = (value: string) => {
-    const encrypt = CryptoJS.AES.encrypt(value, key).toString();
-    const decrypted_bytes = CryptoJS.AES.decrypt(encrypt, key)
-    const decrypt = decrypted_bytes.toString(CryptoJS.enc.Utf8)
-
-    return encrypt;
+  const stringfyData = () => {
+    const data = {
+      purchaseId: params.purchaseId,
+      passcode: params.passcode,
+      name: params.name,
+    }
+    console.log(params);
+    return JSON.stringify(params);
   }
   return (
     <View style={styles.container}>
@@ -45,7 +47,7 @@ export default function QrModal() {
           </View>
         </View>
 
-        <QrFactory value={params.purchaseId as string}/>
+        <QrFactory value={stringfyData()}/>
       </View>
       
     </View>

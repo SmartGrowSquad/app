@@ -10,7 +10,7 @@ import { CropDto, PurchaseDto, UrbaniDto } from '../types';
 export const apiSlice = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({ 
-    baseUrl: process.env.REACT_APP_API_URL ? process.env.REACT_APP_API_URL : 'http://172.30.1.87:8080/v1/' ,
+    baseUrl: process.env.REACT_APP_API_URL ? process.env.REACT_APP_API_URL : 'http://192.168.29.181:8080/v1' ,
     prepareHeaders: async (headers, { getState }) => {
       const token = await AsyncStorage.getItem('token');
       if (token) {
@@ -101,7 +101,7 @@ export const apiSlice = createApi({
       query: (id) => ({ url: `/purchase/${id}` }),
 
       transformResponse: (response: { data: PurchaseDto[] }, meta, arg) => {
-        console.log("[response]" + response)
+        console.log("[response]" + response.data)
         return response.data
       }
       // Pick out errors and prevent nested properties in a hook or selector
@@ -151,6 +151,7 @@ export const apiSlice = createApi({
       ) => response.status,
 
       transformResponse: (response: { result: UrbaniDto[] }, meta, arg) => {
+        console.log(response.result);
         return response.result
       }
     }),

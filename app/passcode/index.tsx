@@ -1,29 +1,30 @@
 import Header from "@/components/header/Header";
 import { DefaultText, Title20 } from "@/components/StyledText";
 import { useGetPurchasesQuery } from "@/store/slices/apiSlice";
+import { setLoading } from "@/store/slices/loadingSlice";
 import { RootState } from "@/store/store";
 import { PurchaseDto } from "@/store/types";
 import { router } from "expo-router";
 import { useCallback, useEffect, useState } from "react";
 import { Pressable, ScrollView, View, StyleSheet, RefreshControl } from "react-native";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function PasscodeScreen() {
-  ;
   const user = useSelector((state: RootState) => state.user);
-  const { currentData, isFetching, isError } = useGetPurchasesQuery(user.id)
-  const [puchacedList, setPuchacedList] = useState<PurchaseDto[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const loading = useSelector((state: RootState) => state.loading);
+  const { currentData, isFetching, isError, refetch} = useGetPurchasesQuery(user.id)
+  const [purchacedList, setPurchasedList] = useState<PurchaseDto[]>([]);
   const [refreshing, setRefreshing] = useState(false);
+  const dispatch = useDispatch(); 
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-    setTimeout(() => {
-      setRefreshing(false);
-    }, 2000);
+    refetch();
+    setRefreshing(false);
   }, []);
+  
   // 준비 중인 아이템은 뒤로 보내기
-  const sortPuchacedList = (puchacedList: PurchaseDto[]) => {
+  const sortPurchasedList = (puchacedList: PurchaseDto[]) => {
     const readyList = puchacedList.filter((item) => item.status === 1);
     const unreadyList = puchacedList.filter((item) => item.status !== 1);
     return [ ...readyList, ...unreadyList];
@@ -42,13 +43,11 @@ export default function PasscodeScreen() {
   }
 
   useEffect(() => {
-    console.log(user.id);
-   if(!isFetching) {
-    console.log(currentData);
-    setPuchacedList(sortPuchacedList(currentData!));
-    setLoading(false);
-   }
-  }, [isFetching]);
+    if (currentData) {
+      setPurchasedList(sortPurchasedList(currentData));
+    }
+  }, [currentData]);
+
   return (
     <View style={styles.container}>
       <Header back={() => router.back()} title="픽업" backgroundColor="#fff"/>
@@ -58,10 +57,10 @@ export default function PasscodeScreen() {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} /> 
       }>
         {
-          !loading && 
+          !isFetching && 
           <View style={styles.itemListContainer}>
             {
-              puchacedList.map((purchaceItme, index) => {
+              purchacedList.length > 0 && purchacedList.map((purchaceItme, index) => {
                 return (
                   <Pressable 
                     key={index} 

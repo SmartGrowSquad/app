@@ -24,7 +24,7 @@ export default function ServiceScreen() {
         backgroundColor: '#f0f0f0',
         borderRadius: 8
       }}>
-        {data.imageUrl ? <Image source={{ uri: data.imageUrl }} style={styles.image}/> : null}
+        {data.imageUrl ? <Image source={require("../../../assets/images/lettuce.png")} style={styles.image}/> : null}
       </View>
       
       <View>

@@ -2,16 +2,16 @@ import Header from "@/components/header/Header";
 import OrderComplete from "@/components/OrderComplete";
 import { Body16, Caption, DefaultText, Title16, Title20, Title24 } from "@/components/StyledText";
 import { useGetCropDetailQuery, useGetUrbaniInfoQuery, usePostPurchaseMutation } from "@/store/slices/apiSlice";
+import { setLoading } from "@/store/slices/loadingSlice";
 import { RootState } from "@/store/store";
 import { UrbaniDto } from "@/store/types";
 import { AntDesign } from "@expo/vector-icons";
 import { router, useLocalSearchParams } from "expo-router";
 import { useEffect, useRef, useState } from "react";
 import { View, StyleSheet, ScrollView, Pressable, TextInput, Image } from "react-native";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function DetailScreen() {
-  
   const { id } = useLocalSearchParams(); 
   const [amount, setAmount] = useState(1);
   const { currentData, isFetching, isError } = useGetCropDetailQuery(Number(id));
@@ -21,6 +21,9 @@ export default function DetailScreen() {
   const [orderComplete, setOrderComplete] = useState(false);
   const [order, { isLoading: isUpdating }] = usePostPurchaseMutation()
   const user = useSelector((state: RootState) => state.user);
+  const loading = useSelector((state: RootState) => state.loading);
+  const dispatch = useDispatch();
+
   const isOrderCompletedStyle = () => selectedBranch ? 'orderComplete' : 'orderIncomplete';
 
   const handleOrder = () => {
@@ -30,16 +33,19 @@ export default function DetailScreen() {
         acId: Number(id),
         amount: amount,
         memberId: user.id
-      })
+      });
+
+      dispatch(setLoading(true));
     }
   };
 
   useEffect(() => {
-    if(!isFetching && !urbanQ.isFetching) {
+    if(loading) {
       console.log(currentData);
       setSelectedBranch(urbanQ.currentData!);
+      dispatch(setLoading(false));
     }
-  }, [isFetching, urbanQ.isFetching]);
+  }, [loading]);
   return (
     orderComplete ? <OrderComplete /> :
     <View style={styles.container}>
@@ -68,10 +74,6 @@ export default function DetailScreen() {
           <Title16>지점</Title16>
           <Title16>{urbanQ.currentData?.name}</Title16>
         </View>
-
-        {/* order button */}
-        {selectedBranch !== null &&
-         (
           <View style={styles.orderSummaryContainer}>
             <View>
               <Title16>최종 주문정보</Title16>
@@ -79,14 +81,14 @@ export default function DetailScreen() {
                 <Caption>상추</Caption>
                 <Caption>{amount}</Caption>
               </View>
-              {/*  */}
+          
             </View>
             <View style={styles.totalPayContainer}>
               <Title20>총 결제 금액</Title20>
               <Title24 style={styles.priceText}>{(currentData?.price! * amount).toLocaleString()}원</Title24>
             </View>
           </View>
-        )}
+        
       </ScrollView>
 
       <View style={[styles.orderButtonContainer, {

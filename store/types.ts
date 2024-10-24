@@ -25,6 +25,7 @@ export interface PurchaseDto {
   status: number,
   passcode: string,
   urbaniName: string,
+  urbaniId: number,
   id: number,
   location: string,
 }

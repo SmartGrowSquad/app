@@ -56,8 +56,6 @@ export default function SearchScreen({...props}) {
   const handlePressMyLocation = () => {
     moveMapView(region)
   }
-
-
   const renderBackdrop = useCallback(
 		(props: any) => (
 			<BottomSheetBackdrop
@@ -73,28 +71,28 @@ export default function SearchScreen({...props}) {
   useEffect(() => {
     (async () => {
       if(!isFetching) {
-        console.log("[ done ]"+currentData);
-        console.log("[ done ]"+currentData);
-      }
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== 'granted') {
-        setErrorMsg('Permission to access location was denied');
-        return;
-      }
-      
-      // 현재 위치
-      let location = await Location.getCurrentPositionAsync({});
-      console.log(location);  
-      // 현재 위치 확인 이후 주변 어반이 검색
-      setLocation(location.coords);
-      console.log("[ currentData ]"+ currentData);
-      // 타입 변경 후 저장
-      const region: LatLng = {
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude,
+        console.log("[ done ]"+ currentData);
+        let { status } = await Location.requestForegroundPermissionsAsync();
+        if (status !== 'granted') {
+          setErrorMsg('Permission to access location was denied');
+          return;
+        }
+        
+        // 현재 위치
+        let location = await Location.getCurrentPositionAsync({});
+        console.log(location);  
+        // 현재 위치 확인 이후 주변 어반이 검색
+        setLocation(location.coords);
+        console.log("[ currentData ]"+ currentData);
+        // 타입 변경 후 저장
+        const region: LatLng = {
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude,
+        }
+  
+        setRegion(region);
       }
 
-      setRegion(region);
     })();
   }, [isFetching]);
   
@@ -111,7 +109,6 @@ export default function SearchScreen({...props}) {
           longitudeDelta: 0.0922
         }}
         showsMyLocationButton={false}
-        followsUserLocation
         showsUserLocation
         userInterfaceStyle="light"
       >
@@ -135,7 +132,7 @@ export default function SearchScreen({...props}) {
         ref={bottomSheetRef}
         index={0}
         onChange={handleSheetChanges}
-        snapPoints={['50%']}
+        snapPoints={snapPoints}
         backdropComponent={renderBackdrop}
         style={styles.bottomSheetModalContainer}
       >

@@ -1,12 +1,17 @@
 import { Body16, Caption, Title20 } from "@/components/StyledText";
+import { unauthenticate } from "@/store/slices/authSlice";
 import { RootState } from "@/store/store";
 import { router } from "expo-router";
 import { View, StyleSheet, Pressable } from "react-native";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function SettingScreen() { 
   const user = useSelector((state: RootState) => state.user);
   const auth = useSelector((state: RootState) => state.auth);
+  const dispatch = useDispatch();
+  const handleLogout = () => {
+    dispatch(unauthenticate());
+  }
 
   return (
     <View style={styles.container}>
@@ -45,7 +50,7 @@ export default function SettingScreen() {
       <View>
         {
           auth.authenticated &&
-          <Pressable onPress={() => {}}>
+          <Pressable onPress={handleLogout}>
             <Body16>로그아웃</Body16>
           </Pressable>
         }
