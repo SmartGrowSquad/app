@@ -1,7 +1,7 @@
 import Header from "@/components/header/Header";
 import LocationView from "@/components/location/LocationView";
 import ItemListView from "@/components/serivce/ItemListView";
-import { Caption, DefaultText, Title16 } from "@/components/StyledText";
+import { Caption, DefaultText, Title16, Title20 } from "@/components/StyledText";
 import { useGetAllCropsQuery } from "@/store/slices/apiSlice";
 import { router, useLocalSearchParams } from "expo-router";
 import { useEffect } from "react";
@@ -24,12 +24,13 @@ export default function ServiceScreen() {
         backgroundColor: '#f0f0f0',
         borderRadius: 8
       }}>
-        {data.imageUrl ? <Image source={require("../../../assets/images/lettuce.png")} style={styles.image}/> : null}
+        <Image source={require("../../../assets/images/lettuce.png")} style={styles.image}/>
       </View>
       
       <View>
         <Title16>{data.name}</Title16>
-        <Caption>{data.subtitle}</Caption>
+        <Caption>{data.description}</Caption>
+        <Title20>{data.price.toLocaleString()}원</Title20>
       </View>
     </View>
   return (

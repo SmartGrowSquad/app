@@ -10,7 +10,7 @@ import { CropDto, PurchaseDto, UrbaniDto } from '../types';
 export const apiSlice = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({ 
-    baseUrl: process.env.REACT_APP_API_URL ? process.env.REACT_APP_API_URL : 'http://192.168.29.181:8080/v1' ,
+    baseUrl: process.env.REACT_APP_API_URL ? process.env.REACT_APP_API_URL : 'http://localhost:8080/v1' ,
     prepareHeaders: async (headers, { getState }) => {
       const token = await AsyncStorage.getItem('token');
       if (token) {

@@ -19,8 +19,7 @@ export default function ItemListView({
 
   useEffect(() => {
     const data = [
-      "채소",
-      "허브",
+      "채소"
     ]
     setCategories(data)
     setSelectedCategory(data[0]);

@@ -46,14 +46,16 @@ export default function DetailScreen() {
       dispatch(setLoading(false));
     }
   }, [loading]);
+
   return (
     orderComplete ? <OrderComplete /> :
-    <View style={styles.container}>
+    currentData && <View style={styles.container}>
       <Header back={() => router.back()} backgroundColor="#fff"/>
       <ScrollView>
         {/* 상품 이미지 */}
         <View style={styles.imageContainer}>
-          <View style={styles.image}></View>
+          {/* <View style={styles.image}></View> */}
+          <Image source={require("../../../assets/images/lettuce.png")} style={styles.image}/>
         </View>
           
         {/* info */}
@@ -78,7 +80,7 @@ export default function DetailScreen() {
             <View>
               <Title16>최종 주문정보</Title16>
               <View style={styles.finalOderInfoContainer}>
-                <Caption>상추</Caption>
+                <Caption>{currentData!.name}</Caption>
                 <Caption>{amount}</Caption>
               </View>
           
@@ -102,7 +104,7 @@ export default function DetailScreen() {
               </View>
               <Pressable onPress={() => setAmount(prev => prev + 1)}><AntDesign name="plus" size={20} color="black" /></Pressable>
             </View>
-            <Pressable style={styles[isOrderCompletedStyle()]} onPress={handleOrder}>
+            <Pressable style={styles['orderComplete']} onPress={handleOrder}>
               <Title16>결제하기</Title16>
             </Pressable>
           </View>
